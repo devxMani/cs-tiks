@@ -1,10 +1,8 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
+import { motion } from "framer-motion";
 
 const FlowingLines = () => (
   <svg
-    className="absolute inset-0 w-full h-full opacity-20"
+    className="absolute inset-0 w-full h-full opacity-20 pointer-events-none"
     viewBox="0 0 1200 800"
     fill="none"
     preserveAspectRatio="xMidYMid slice"
@@ -48,29 +46,8 @@ const FlowingLines = () => (
 );
 
 const Hero = () => {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
-      {/* Background Image with parallax */}
-      <motion.div 
-        className="absolute inset-0"
-        style={{ 
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-          y
-        }}
-      />
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-background/30 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-background/20" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
       <FlowingLines />
 
       <div className="container relative z-10 px-6">
