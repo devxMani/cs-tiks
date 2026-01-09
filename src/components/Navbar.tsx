@@ -20,7 +20,7 @@ const Navbar = () => {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-1">
-            {["Practice", "Duels", "Leaderboard", "Topics"].map((item) => (
+            {["Practice", "Duel", "Leaderboard", "Profile"].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -33,11 +33,14 @@ const Navbar = () => {
 
           {/* CTA */}
           <div className="flex items-center gap-3">
-            <span className="hidden sm:block text-[10px] text-muted-foreground tracking-wider">
-              V_1.0.0
-            </span>
+            <a
+              href="#"
+              className="hidden sm:block text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Login
+            </a>
             <button className="px-5 py-2 text-sm font-medium bg-foreground text-background rounded-full hover:bg-foreground/90 transition-colors">
-              Enter
+              Sign Up
             </button>
           </div>
         </div>
