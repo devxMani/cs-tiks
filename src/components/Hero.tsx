@@ -51,10 +51,15 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-right bg-no-repeat opacity-40"
-        style={{ backgroundImage: `url(${heroBg})` }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: `url(${heroBg})`,
+          backgroundPosition: '70% center'
+        }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+      {/* Gradient overlays for readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
       <FlowingLines />
 
       <div className="container relative z-10 px-6">
