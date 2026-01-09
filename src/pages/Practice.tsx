@@ -1,90 +1,229 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
-import { Link } from "react-router-dom";
+import QuizGame from "@/components/QuizGame";
+import QuizResultsView, { } from "@/components/QuizResultsView";
+import { getQuestionsByTopic, Question } from "@/data/questions";
+import { QuizResults } from "@/components/QuizGame";
 
 const topics = [
-  { id: "dsa", name: "DSA", questions: 40, description: "Arrays, Trees, Graphs, DP", icon: "⚡" },
-  { id: "dbms", name: "DBMS", questions: 30, description: "SQL, Normalization, Transactions", icon: "🗄️" },
-  { id: "os", name: "Operating Systems", questions: 30, description: "Processes, Memory, Scheduling", icon: "💻" },
-  { id: "networks", name: "Networks", questions: 20, description: "TCP/IP, OSI, Protocols", icon: "🌐" },
+  { 
+    id: "dsa", 
+    name: "Data Structures & Algorithms", 
+    shortName: "DSA",
+    questions: 10, 
+    description: "Arrays, Trees, Graphs, Dynamic Programming, Sorting & Searching", 
+    icon: "⚡",
+    gradient: "from-violet-500/20 to-purple-500/20",
+    borderColor: "border-violet-500/30"
+  },
+  { 
+    id: "dbms", 
+    name: "Database Management", 
+    shortName: "DBMS",
+    questions: 8, 
+    description: "SQL, Normalization, Transactions, ACID Properties, Joins", 
+    icon: "🗄️",
+    gradient: "from-blue-500/20 to-cyan-500/20",
+    borderColor: "border-blue-500/30"
+  },
+  { 
+    id: "os", 
+    name: "Operating Systems", 
+    shortName: "OS",
+    questions: 8, 
+    description: "Processes, Memory Management, Scheduling, Deadlocks", 
+    icon: "💻",
+    gradient: "from-emerald-500/20 to-green-500/20",
+    borderColor: "border-emerald-500/30"
+  },
+  { 
+    id: "networks", 
+    name: "Computer Networks", 
+    shortName: "Networks",
+    questions: 8, 
+    description: "TCP/IP, OSI Model, Protocols, Routing, DNS", 
+    icon: "🌐",
+    gradient: "from-orange-500/20 to-amber-500/20",
+    borderColor: "border-orange-500/30"
+  },
 ];
 
+type GameState = "menu" | "playing" | "results";
+
 const Practice = () => {
+  const [gameState, setGameState] = useState<GameState>("menu");
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+  const [currentQuestions, setCurrentQuestions] = useState<Question[]>([]);
+  const [results, setResults] = useState<QuizResults | null>(null);
+
+  const startPractice = (topicId: string) => {
+    const questions = getQuestionsByTopic(topicId, 10);
+    setCurrentQuestions(questions);
+    setSelectedTopic(topicId);
+    setGameState("playing");
+  };
+
+  const handleComplete = (quizResults: QuizResults) => {
+    setResults(quizResults);
+    setGameState("results");
+  };
+
+  const handlePlayAgain = () => {
+    if (selectedTopic) {
+      startPractice(selectedTopic);
+    }
+  };
+
+  const handleExit = () => {
+    setGameState("menu");
+    setSelectedTopic(null);
+    setResults(null);
+  };
+
   return (
     <Layout>
       <section className="min-h-screen pt-32 pb-20">
         <div className="container px-6">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl mb-16"
-          >
-            <span className="status-badge mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse-slow" />
-              PRACTICE MODE
-            </span>
-            <h1 className="text-4xl md:text-6xl font-light tracking-tight mt-6 mb-4">
-              Solo Practice
-            </h1>
-            <p className="text-muted-foreground leading-relaxed">
-              Pick a topic and answer 10 random questions. Immediate feedback after each answer.
-              No time pressure, just pure learning.
-            </p>
-          </motion.div>
-
-          {/* Topic cards */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {topics.map((topic, index) => (
+          {gameState === "menu" && (
+            <>
+              {/* Header */}
               <motion.div
-                key={topic.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-card p-6 hover:border-foreground/20 transition-all cursor-pointer group"
+                transition={{ duration: 0.6 }}
+                className="max-w-3xl mb-16"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-muted to-accent flex items-center justify-center text-2xl">
-                    {topic.icon}
-                  </div>
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                    {topic.questions} Questions
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="status-badge">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    PRACTICE MODE
                   </span>
+                  <span className="text-xs text-muted-foreground">No time limit • Instant feedback</span>
                 </div>
-                <h3 className="text-xl font-light mb-2 group-hover:text-foreground transition-colors">
-                  {topic.name}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-6">{topic.description}</p>
-                <button className="w-full py-3 text-sm font-medium border border-border rounded-lg hover:bg-foreground hover:text-background transition-all">
-                  Start Practice
-                </button>
+                <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">
+                  Solo <span className="text-muted-foreground">Practice</span>
+                </h1>
+                <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
+                  Choose a topic and master the fundamentals. Each session gives you 10 random questions
+                  with detailed feedback after every answer.
+                </p>
               </motion.div>
-            ))}
-          </div>
 
-          {/* Info section */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-16 glass-card p-8"
-          >
-            <div className="grid md:grid-cols-3 gap-8">
-              <div>
-                <span className="text-3xl font-light">10</span>
-                <p className="text-sm text-muted-foreground mt-1">Questions per session</p>
+              {/* Stats bar */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="glass-card p-6 mb-12 flex flex-wrap items-center justify-between gap-6"
+              >
+                <div className="flex items-center gap-8">
+                  <div>
+                    <span className="text-3xl font-light">120+</span>
+                    <p className="text-xs text-muted-foreground">Total Questions</p>
+                  </div>
+                  <div className="w-px h-12 bg-border" />
+                  <div>
+                    <span className="text-3xl font-light">4</span>
+                    <p className="text-xs text-muted-foreground">Topics</p>
+                  </div>
+                  <div className="w-px h-12 bg-border hidden md:block" />
+                  <div className="hidden md:block">
+                    <span className="text-3xl font-light">∞</span>
+                    <p className="text-xs text-muted-foreground">Attempts</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-sm text-muted-foreground">Ready to practice</span>
+                </div>
+              </motion.div>
+
+              {/* Topic cards */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {topics.map((topic, index) => (
+                  <motion.div
+                    key={topic.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+                    onClick={() => startPractice(topic.id)}
+                    className={`glass-card p-8 cursor-pointer group transition-all hover:scale-[1.02] ${topic.borderColor} hover:border-opacity-100`}
+                  >
+                    <div className="flex items-start justify-between mb-6">
+                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${topic.gradient} flex items-center justify-center text-3xl`}>
+                        {topic.icon}
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[10px] uppercase tracking-wider text-muted-foreground block">
+                          {topic.questions} Questions
+                        </span>
+                        <span className="text-[10px] uppercase tracking-wider text-muted-foreground/50">
+                          Available
+                        </span>
+                      </div>
+                    </div>
+                    <h3 className="text-2xl font-light mb-2 group-hover:text-foreground transition-colors">
+                      {topic.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-8 leading-relaxed">{topic.description}</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-1 bg-foreground/20 rounded-full overflow-hidden">
+                          <div className="w-0 h-full bg-foreground group-hover:w-full transition-all duration-500" />
+                        </div>
+                      </div>
+                      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                        Start Practice →
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
-              <div>
-                <span className="text-3xl font-light">∞</span>
-                <p className="text-sm text-muted-foreground mt-1">No time limit</p>
-              </div>
-              <div>
-                <span className="text-3xl font-light">✓</span>
-                <p className="text-sm text-muted-foreground mt-1">Immediate feedback</p>
-              </div>
-            </div>
-          </motion.div>
+
+              {/* Bottom info */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="mt-16 text-center"
+              >
+                <p className="text-sm text-muted-foreground">
+                  💡 Tip: Practice regularly to improve your accuracy and speed
+                </p>
+              </motion.div>
+            </>
+          )}
+
+          {gameState === "playing" && currentQuestions.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="glass-card p-8"
+            >
+              <QuizGame
+                questions={currentQuestions}
+                mode="practice"
+                onComplete={handleComplete}
+                onExit={handleExit}
+              />
+            </motion.div>
+          )}
+
+          {gameState === "results" && results && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="glass-card p-8"
+            >
+              <QuizResultsView
+                results={results}
+                mode="practice"
+                onPlayAgain={handlePlayAgain}
+                onExit={handleExit}
+              />
+            </motion.div>
+          )}
         </div>
       </section>
     </Layout>

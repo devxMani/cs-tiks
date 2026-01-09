@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -9,21 +8,28 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div ref={ref} className="relative min-h-screen bg-background">
+    <div className="relative min-h-screen bg-background">
       {/* Global parallax background */}
-      <motion.div 
-        className="fixed inset-0 z-0"
+      <div 
+        className="fixed inset-0 z-0 will-change-transform"
         style={{ 
           backgroundImage: `url(${heroBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
-          y
+          transform: `translateY(${scrollY * 0.3}px) scale(1.1)`,
         }}
       />
       {/* Global gradient overlays */}
