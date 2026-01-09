@@ -115,29 +115,27 @@ const Hero = () => {
             </motion.p>
           </div>
 
-          {/* Right bento grid */}
-          <div className="lg:col-span-5">
-            <div className="bento-grid grid-cols-2 grid-rows-3 h-[500px]">
+          {/* Right bento grid - compact */}
+          <div className="lg:col-span-4">
+            <div className="bento-grid grid-cols-2 grid-rows-3 h-[340px] gap-2">
               {/* Practice card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="col-span-1 row-span-1 glass-card p-4 flex flex-col justify-between"
+                className="col-span-1 row-span-1 glass-card p-3 flex flex-col justify-between"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  <span className="text-[9px] uppercase tracking-wider text-muted-foreground">
                     Practice
                   </span>
                   <div className="flex gap-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30" />
+                    <div className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+                    <div className="w-1 h-1 rounded-full bg-muted-foreground/30" />
                   </div>
                 </div>
-                <div className="mt-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-muted to-accent flex items-center justify-center">
-                    <span className="text-xl">⌘</span>
-                  </div>
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-muted to-accent flex items-center justify-center">
+                  <span className="text-base">⌘</span>
                 </div>
               </motion.div>
 
@@ -146,26 +144,26 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="col-span-1 row-span-2 glass-card p-4 flex flex-col justify-between"
+                className="col-span-1 row-span-2 glass-card p-3 flex flex-col justify-between"
               >
                 <div>
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  <span className="text-[9px] uppercase tracking-wider text-muted-foreground">
                     Live Stats
                   </span>
-                  <div className="mt-6 space-y-4">
+                  <div className="mt-3 space-y-2">
                     <div>
-                      <span className="text-3xl font-light">100+</span>
-                      <p className="text-[10px] text-muted-foreground mt-1">Questions</p>
+                      <span className="text-2xl font-light">100+</span>
+                      <p className="text-[9px] text-muted-foreground">Questions</p>
                     </div>
                     <div>
-                      <span className="text-3xl font-light">4</span>
-                      <p className="text-[10px] text-muted-foreground mt-1">Topics</p>
+                      <span className="text-2xl font-light">4</span>
+                      <p className="text-[9px] text-muted-foreground">Topics</p>
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-slow" />
-                  <span className="text-[10px] text-muted-foreground">Active Now</span>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse-slow" />
+                  <span className="text-[9px] text-muted-foreground">Active Now</span>
                 </div>
               </motion.div>
 
@@ -174,11 +172,11 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="col-span-1 row-span-1 glass-card p-4"
+                className="col-span-1 row-span-1 glass-card p-3"
               >
-                <span className="text-lg font-light">Quick Duel</span>
-                <p className="text-[10px] text-muted-foreground mt-1">5 Questions • 20s Timer</p>
-                <div className="mt-3 w-full h-1 bg-muted rounded-full overflow-hidden">
+                <span className="text-sm font-light">Quick Duel</span>
+                <p className="text-[9px] text-muted-foreground mt-0.5">5 Questions • 20s</p>
+                <div className="mt-2 w-full h-0.5 bg-muted rounded-full overflow-hidden">
                   <div className="h-full w-2/3 bg-foreground/30 rounded-full" />
                 </div>
               </motion.div>
@@ -188,42 +186,29 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="col-span-2 row-span-1 glass-card p-4 relative overflow-hidden"
+                className="col-span-2 row-span-1 glass-card p-3 relative overflow-hidden"
               >
                 <div className="absolute inset-0 flex items-center justify-center">
                   <svg
                     width="100%"
                     height="100%"
-                    viewBox="0 0 300 100"
+                    viewBox="0 0 300 60"
                     fill="none"
                     className="opacity-40"
                   >
-                    <circle cx="50" cy="50" r="20" stroke="hsl(0 0% 25%)" strokeWidth="1" />
-                    <circle cx="150" cy="50" r="25" stroke="hsl(0 0% 30%)" strokeWidth="1" />
-                    <circle cx="250" cy="50" r="20" stroke="hsl(0 0% 25%)" strokeWidth="1" />
-                    <path
-                      d="M70 50 L125 50"
-                      stroke="hsl(0 0% 30%)"
-                      strokeWidth="1"
-                      className="animate-beam"
-                    />
-                    <path
-                      d="M175 50 L230 50"
-                      stroke="hsl(0 0% 30%)"
-                      strokeWidth="1"
-                      className="animate-beam"
-                      style={{ animationDelay: "0.5s" }}
-                    />
+                    <circle cx="50" cy="30" r="12" stroke="hsl(0 0% 25%)" strokeWidth="1" />
+                    <circle cx="150" cy="30" r="15" stroke="hsl(0 0% 30%)" strokeWidth="1" />
+                    <circle cx="250" cy="30" r="12" stroke="hsl(0 0% 25%)" strokeWidth="1" />
+                    <path d="M62 30 L135 30" stroke="hsl(0 0% 30%)" strokeWidth="1" className="animate-beam" />
+                    <path d="M165 30 L238 30" stroke="hsl(0 0% 30%)" strokeWidth="1" className="animate-beam" style={{ animationDelay: "0.5s" }} />
                   </svg>
                 </div>
                 <div className="relative z-10 flex justify-between items-center">
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                      Matchmaking
-                    </span>
-                    <p className="text-xs mt-1">Random Opponent • Same Questions</p>
+                    <span className="text-[9px] uppercase tracking-wider text-muted-foreground">Matchmaking</span>
+                    <p className="text-[10px] mt-0.5">Random Opponent</p>
                   </div>
-                  <span className="text-[10px] text-emerald-500">LIVE</span>
+                  <span className="text-[9px] text-emerald-500">LIVE</span>
                 </div>
               </motion.div>
             </div>
