@@ -17,190 +17,136 @@ const players = [
 const Leaderboard = () => {
   return (
     <Layout>
-      <section className="min-h-screen pt-32 pb-20">
-        <div className="container px-6">
+      <section className="min-h-screen pt-28 pb-20">
+        <div className="container px-6 max-w-4xl mx-auto">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mb-12"
+            transition={{ duration: 0.5 }}
+            className="mb-10"
           >
-            <div className="flex items-center gap-4 mb-6">
-              <span className="status-badge">
-                <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
-                RANKINGS
-              </span>
-              <span className="text-xs text-muted-foreground">Updated in real-time</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">
-              Leader<span className="text-muted-foreground">board</span>
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border/60 bg-card/50 mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
+              Live Rankings
+            </span>
+            <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-3">
+              Leaderboard
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-              The top players ranked by total wins. Climb the ranks through competitive duels.
+            <p className="text-muted-foreground">
+              Top players ranked by total wins.
             </p>
           </motion.div>
 
-          {/* Top 3 podium */}
+          {/* Top 3 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-end justify-center gap-4 mb-16"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex items-end justify-center gap-4 mb-10"
           >
-            {/* 2nd place */}
-            <motion.div 
-              className="glass-card p-6 text-center w-44"
-              initial={{ y: 50 }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-300/20 to-gray-400/20 mx-auto mb-4 flex items-center justify-center border-2 border-gray-400/30">
-                <span className="text-3xl">🥈</span>
-              </div>
-              <span className="text-lg font-medium block">{players[1].name}</span>
-              <p className="text-sm text-muted-foreground">{players[1].wins} wins</p>
-              <div className="mt-3 flex items-center justify-center gap-2">
-                <span className="text-xs text-emerald-500">{players[1].accuracy}%</span>
-                <span className="text-xs text-muted-foreground">accuracy</span>
-              </div>
-            </motion.div>
-
-            {/* 1st place */}
-            <motion.div 
-              className="glass-card p-8 text-center w-52 border-yellow-500/30 relative overflow-hidden"
-              initial={{ y: 50 }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/5 to-transparent" />
-              <div className="relative">
-                <motion.div 
-                  className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-400/30 to-amber-500/30 mx-auto mb-4 flex items-center justify-center border-2 border-yellow-500/50"
-                  animate={{ 
-                    boxShadow: ["0 0 0 0 rgba(234, 179, 8, 0)", "0 0 30px 10px rgba(234, 179, 8, 0.1)", "0 0 0 0 rgba(234, 179, 8, 0)"],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
+            {[1, 0, 2].map((index) => {
+              const player = players[index];
+              const isFirst = index === 0;
+              return (
+                <div
+                  key={player.rank}
+                  className={`text-center ${isFirst ? "order-2" : index === 1 ? "order-1" : "order-3"}`}
                 >
-                  <span className="text-4xl">👑</span>
-                </motion.div>
-                <span className="text-xl font-medium block">{players[0].name}</span>
-                <p className="text-muted-foreground">{players[0].wins} wins</p>
-                <div className="mt-3 flex items-center justify-center gap-4">
-                  <div>
-                    <span className="text-lg text-emerald-500">{players[0].accuracy}%</span>
-                    <p className="text-[10px] text-muted-foreground">accuracy</p>
+                  <div
+                    className={`mx-auto mb-3 rounded-full flex items-center justify-center border-2 ${
+                      isFirst
+                        ? "w-20 h-20 border-yellow-500/50 bg-yellow-500/10"
+                        : "w-16 h-16 border-border bg-card/30"
+                    }`}
+                  >
+                    <span className="text-2xl">
+                      {isFirst ? "👑" : index === 1 ? "🥈" : "🥉"}
+                    </span>
                   </div>
-                  <div>
-                    <span className="text-lg text-orange-500">🔥{players[0].streak}</span>
-                    <p className="text-[10px] text-muted-foreground">streak</p>
-                  </div>
+                  <span className="block text-sm font-medium">{player.name}</span>
+                  <span className="text-xs text-muted-foreground">{player.wins} wins</span>
                 </div>
-                <span className="inline-block mt-4 px-3 py-1.5 text-[10px] uppercase tracking-wider bg-yellow-500/10 text-yellow-500 rounded-full border border-yellow-500/30">
-                  Champion
-                </span>
-              </div>
-            </motion.div>
-
-            {/* 3rd place */}
-            <motion.div 
-              className="glass-card p-6 text-center w-44"
-              initial={{ y: 50 }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-600/20 to-amber-700/20 mx-auto mb-4 flex items-center justify-center border-2 border-amber-600/30">
-                <span className="text-3xl">🥉</span>
-              </div>
-              <span className="text-lg font-medium block">{players[2].name}</span>
-              <p className="text-sm text-muted-foreground">{players[2].wins} wins</p>
-              <div className="mt-3 flex items-center justify-center gap-2">
-                <span className="text-xs text-emerald-500">{players[2].accuracy}%</span>
-                <span className="text-xs text-muted-foreground">accuracy</span>
-              </div>
-            </motion.div>
+              );
+            })}
           </motion.div>
 
-          {/* Full leaderboard table */}
+          {/* Table */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="glass-card overflow-hidden"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="rounded-xl border border-border/50 overflow-hidden"
           >
             {/* Header */}
-            <div className="grid grid-cols-12 gap-4 p-4 border-b border-border text-[10px] uppercase tracking-wider text-muted-foreground bg-muted/30">
-              <span className="col-span-1">Rank</span>
+            <div className="grid grid-cols-12 gap-4 px-4 py-3 bg-card/30 text-[10px] uppercase tracking-wider text-muted-foreground border-b border-border/50">
+              <span className="col-span-1">#</span>
               <span className="col-span-4">Player</span>
-              <span className="col-span-2 text-right">Wins</span>
-              <span className="col-span-2 text-right">Losses</span>
+              <span className="col-span-2 text-right">W/L</span>
+              <span className="col-span-2 text-right">Win %</span>
               <span className="col-span-2 text-right">Accuracy</span>
-              <span className="col-span-1 text-right">Streak</span>
+              <span className="col-span-1 text-right">🔥</span>
             </div>
-            
+
             {/* Rows */}
-            {players.map((player, index) => (
+            {players.map((player, i) => (
               <motion.div
                 key={player.rank}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
-                className={`grid grid-cols-12 gap-4 p-4 border-b border-border/50 hover:bg-muted/20 transition-colors ${
-                  index < 3 ? "bg-gradient-to-r from-yellow-500/5 to-transparent" : ""
-                }`}
+                transition={{ duration: 0.3, delay: 0.3 + i * 0.03 }}
+                className="grid grid-cols-12 gap-4 px-4 py-3 border-b border-border/30 last:border-0 hover:bg-card/20 transition-colors"
               >
-                <span className="col-span-1 flex items-center gap-2">
-                  {index < 3 ? (
-                    <span className="text-lg">{index === 0 ? "🥇" : index === 1 ? "🥈" : "🥉"}</span>
-                  ) : (
-                    <span className="text-muted-foreground">#{player.rank}</span>
-                  )}
-                </span>
-                <div className="col-span-4 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                    <span className="text-sm">👤</span>
+                <span className="col-span-1 text-muted-foreground">{player.rank}</span>
+                <div className="col-span-4 flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-muted/50 flex items-center justify-center text-xs">
+                    {player.name[0]}
                   </div>
-                  <span className="font-medium">{player.name}</span>
+                  <span className="text-sm">{player.name}</span>
                 </div>
-                <span className="col-span-2 text-right text-emerald-500 flex items-center justify-end">{player.wins}</span>
-                <span className="col-span-2 text-right text-red-500 flex items-center justify-end">{player.losses}</span>
-                <span className="col-span-2 text-right flex items-center justify-end">{player.accuracy}%</span>
-                <span className="col-span-1 text-right flex items-center justify-end">
-                  {player.streak > 0 && <span className="text-orange-500">🔥{player.streak}</span>}
+                <span className="col-span-2 text-right text-sm">
+                  <span className="text-emerald-500">{player.wins}</span>
+                  <span className="text-muted-foreground">/</span>
+                  <span className="text-red-400">{player.losses}</span>
+                </span>
+                <span className="col-span-2 text-right text-sm">
+                  {Math.round((player.wins / (player.wins + player.losses)) * 100)}%
+                </span>
+                <span className="col-span-2 text-right text-sm">{player.accuracy}%</span>
+                <span className="col-span-1 text-right text-sm">
+                  {player.streak > 0 && <span className="text-orange-400">{player.streak}</span>}
                 </span>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Your rank card */}
+          {/* Your rank */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-8 glass-card p-6 border-emerald-500/30"
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-6 p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/5"
           >
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                  <span className="text-xl">👤</span>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                  <span>👤</span>
                 </div>
                 <div>
-                  <span className="text-sm text-muted-foreground">Your Rank</span>
-                  <p className="text-2xl font-light">#24</p>
+                  <span className="text-xs text-muted-foreground">Your Rank</span>
+                  <p className="text-lg font-light">#24</p>
                 </div>
               </div>
-              <div className="flex items-center gap-8">
+              <div className="flex items-center gap-6 text-sm">
                 <div className="text-right">
-                  <span className="text-2xl font-light text-emerald-500">45</span>
-                  <p className="text-xs text-muted-foreground">Wins</p>
+                  <span className="text-emerald-500">45</span>
+                  <span className="text-muted-foreground">/12</span>
+                  <p className="text-[10px] text-muted-foreground">W/L</p>
                 </div>
                 <div className="text-right">
-                  <span className="text-2xl font-light">87%</span>
-                  <p className="text-xs text-muted-foreground">Accuracy</p>
+                  <span>87%</span>
+                  <p className="text-[10px] text-muted-foreground">Accuracy</p>
                 </div>
-                <button className="px-4 py-2 text-sm font-medium border border-border rounded-lg hover:bg-foreground hover:text-background transition-all">
-                  View Profile
-                </button>
               </div>
             </div>
           </motion.div>

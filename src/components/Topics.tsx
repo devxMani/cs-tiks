@@ -1,122 +1,92 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const topics = [
-  { 
-    name: "Data Structures & Algorithms", 
-    shortName: "DSA",
-    count: 40, 
-    icon: "∑",
-    description: "Arrays, Linked Lists, Trees, Graphs, DP"
-  },
-  { 
-    name: "Database Management", 
-    shortName: "DBMS",
-    count: 30, 
-    icon: "⊞",
-    description: "SQL, Normalization, Indexing, Transactions"
-  },
-  { 
-    name: "Operating Systems", 
-    shortName: "OS",
-    count: 25, 
-    icon: "⚙",
-    description: "Processes, Memory, Scheduling, Deadlocks"
-  },
-  { 
-    name: "Computer Networks", 
-    shortName: "Networks",
-    count: 25, 
-    icon: "◎",
-    description: "TCP/IP, HTTP, DNS, Routing, Security"
-  },
+  { id: "dsa", name: "Data Structures & Algorithms", shortName: "DSA", count: 35 },
+  { id: "dbms", name: "Database Management", shortName: "DBMS", count: 32 },
+  { id: "os", name: "Operating Systems", shortName: "OS", count: 32 },
+  { id: "networks", name: "Computer Networks", shortName: "Networks", count: 32 },
+  { id: "aiml", name: "AI & Machine Learning", shortName: "AI/ML", count: 35 },
+  { id: "fullstack", name: "Full Stack Development", shortName: "Full Stack", count: 35 },
+  { id: "webdev", name: "Web Development", shortName: "Web Dev", count: 32 },
+  { id: "sysdesign", name: "System Design", shortName: "Sys Design", count: 32 },
+  { id: "security", name: "Cybersecurity", shortName: "Security", count: 32 },
+  { id: "cloud", name: "Cloud Computing", shortName: "Cloud", count: 32 },
 ];
 
 const Topics = () => {
   return (
-    <section className="py-24 md:py-32 border-t border-border/30 relative">
+    <section className="py-24 md:py-32 border-t border-border/30">
       <div className="container px-6">
-        {/* Section header */}
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
+          transition={{ duration: 0.5 }}
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12"
         >
-          <div>
-            <span className="status-badge mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-foreground/50" />
-              TOPICS
+          <div className="max-w-md">
+            <span className="inline-block px-3 py-1.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border/60 bg-card/50 mb-6">
+              Topics
             </span>
-            <h2 className="text-3xl md:text-5xl font-light tracking-tight mt-4">
-              Core CS
-              <span className="text-muted-foreground"> Subjects</span>
+            <h2 className="text-3xl md:text-4xl font-light tracking-tight">
+              Core CS<span className="text-muted-foreground"> Subjects</span>
             </h2>
           </div>
           <p className="text-sm text-muted-foreground max-w-xs">
-            DSA, DBMS, OS, Networks — all the essentials for technical interviews.
+            10 essential topics covering everything from algorithms to cloud computing.
           </p>
         </motion.div>
 
-        {/* Topics grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {topics.map((topic, index) => (
             <motion.div
-              key={topic.name}
-              initial={{ opacity: 0, y: 20 }}
+              key={topic.id}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="group glass-card p-6 cursor-pointer hover:bg-accent/50 transition-all duration-300"
+              transition={{ duration: 0.3, delay: index * 0.05 }}
             >
-              <div className="flex items-start justify-between mb-6">
-                <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center group-hover:bg-foreground/10 transition-colors">
-                  <span className="text-2xl">{topic.icon}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-1 text-[10px] uppercase tracking-wider bg-card border border-border rounded-full">
-                    {topic.shortName}
-                  </span>
+              <Link
+                to="/practice"
+                className="group block p-4 rounded-xl border border-border/50 bg-card/20 hover:bg-card/50 hover:border-border transition-all"
+              >
+                <div className="flex items-center justify-between mb-3">
                   <span className="text-[10px] text-muted-foreground font-mono">
                     {String(index + 1).padStart(2, "0")}
                   </span>
+                  <span className="text-[10px] text-muted-foreground">
+                    {topic.count}Q
+                  </span>
                 </div>
-              </div>
-              <h3 className="text-lg font-medium mb-2 group-hover:text-foreground transition-colors">
-                {topic.name}
-              </h3>
-              <p className="text-xs text-muted-foreground mb-4">
-                {topic.description}
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">
-                  {topic.count} questions
+                <span className="block text-sm font-medium mb-1 group-hover:text-foreground transition-colors">
+                  {topic.shortName}
                 </span>
-                <span className="text-[10px] text-muted-foreground group-hover:text-foreground transition-colors">
-                  Start Practice →
+                <span className="flex items-center text-[10px] text-muted-foreground group-hover:text-foreground/70 transition-colors">
+                  Practice
+                  <ArrowRight className="w-3 h-3 ml-1 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </span>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom summary */}
+        {/* Summary */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-8 flex items-center justify-center gap-8"
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-10 flex items-center justify-center gap-6 text-sm text-muted-foreground"
         >
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-light">120+</span>
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Total Questions</span>
-          </div>
-          <div className="w-px h-6 bg-border" />
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-light">4</span>
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Core Topics</span>
-          </div>
+          <span>300+ Questions</span>
+          <span className="w-1 h-1 rounded-full bg-border" />
+          <span>10 Topics</span>
+          <span className="w-1 h-1 rounded-full bg-border" />
+          <span>Updated Regularly</span>
         </motion.div>
       </div>
     </section>

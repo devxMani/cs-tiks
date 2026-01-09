@@ -1,84 +1,57 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const CTA = () => {
   return (
-    <section className="py-24 md:py-32 border-t border-border/30 relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-accent/20 to-transparent" />
-
-      <div className="container px-6 relative z-10">
+    <section className="py-24 md:py-32 border-t border-border/30">
+      <div className="container px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center"
+          transition={{ duration: 0.5 }}
+          className="max-w-2xl mx-auto text-center"
         >
-          <span className="status-badge mb-8 inline-flex">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse-slow" />
-            GET STARTED
+          <span className="inline-flex items-center gap-2 px-4 py-2 text-[11px] font-medium uppercase tracking-wider rounded-full border border-border/60 bg-card/50 mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            Get Started
           </span>
 
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight mb-6">
-            Ready to
-            <span className="text-muted-foreground"> prove </span>
-            your skills?
+          <h2 className="text-4xl md:text-5xl font-light tracking-tight mb-6">
+            Ready to prove
+            <span className="text-muted-foreground"> your skills?</span>
           </h2>
 
-          <p className="text-muted-foreground mb-12 text-sm max-w-md mx-auto">
-            Sign up with email or Google OAuth. Free forever. Start practicing, start dueling.
+          <p className="text-muted-foreground mb-10 max-w-md mx-auto">
+            Start practicing now. It's free forever — no credit card, no limits.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 text-sm font-medium bg-foreground text-background rounded-full hover:bg-foreground/90 transition-colors"
+            <Link
+              to="/signup"
+              className="group px-8 py-4 text-sm font-medium bg-foreground text-background rounded-full hover:bg-foreground/90 transition-all flex items-center gap-2"
             >
               Sign Up Free
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 text-sm font-medium border border-border rounded-full hover:bg-accent transition-colors"
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+            <Link
+              to="/practice"
+              className="px-8 py-4 text-sm font-medium border border-border rounded-full hover:bg-accent transition-all"
             >
-              View Demo
-            </motion.button>
+              Try Practice Mode
+            </Link>
           </div>
 
-          {/* Flow steps */}
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-4 text-[10px] uppercase tracking-wider text-muted-foreground">
-            <span className="px-3 py-1 border border-border rounded-full">1. Sign Up</span>
-            <span>→</span>
-            <span className="px-3 py-1 border border-border rounded-full">2. Pick Topic</span>
-            <span>→</span>
-            <span className="px-3 py-1 border border-border rounded-full">3. Practice or Duel</span>
-            <span>→</span>
-            <span className="px-3 py-1 border border-border rounded-full">4. Climb Ranks</span>
-          </div>
-
-          {/* Stats row */}
-          <div className="mt-12 flex items-center justify-center gap-8 md:gap-16">
-            <div className="text-center">
-              <span className="block text-2xl md:text-3xl font-light">4</span>
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                Core Topics
-              </span>
-            </div>
-            <div className="w-px h-8 bg-border" />
-            <div className="text-center">
-              <span className="block text-2xl md:text-3xl font-light">120+</span>
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                Questions
-              </span>
-            </div>
-            <div className="w-px h-8 bg-border" />
-            <div className="text-center">
-              <span className="block text-2xl md:text-3xl font-light">100%</span>
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                Free
-              </span>
-            </div>
+          {/* Steps */}
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-3 text-[10px] uppercase tracking-wider text-muted-foreground">
+            <span className="px-3 py-1.5 rounded-full border border-border/60">1. Sign Up</span>
+            <span className="text-border">→</span>
+            <span className="px-3 py-1.5 rounded-full border border-border/60">2. Pick Topic</span>
+            <span className="text-border">→</span>
+            <span className="px-3 py-1.5 rounded-full border border-border/60">3. Practice or Duel</span>
+            <span className="text-border">→</span>
+            <span className="px-3 py-1.5 rounded-full border border-border/60">4. Climb Ranks</span>
           </div>
         </motion.div>
       </div>
