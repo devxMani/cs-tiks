@@ -200,35 +200,35 @@
   .delay-700 { animation-delay: 0.7s; }
   .delay-1000 { animation-delay: 1s; }
 
-  /* Glass card effect - true glassmorphism */
+  /* Glass card effect - improved glassmorphism */
   .glass-card {
     @apply rounded-xl;
     background: linear-gradient(
       135deg,
-      hsl(0 0% 100% / 0.05) 0%,
-      hsl(0 0% 100% / 0.02) 100%
+      hsl(0 0% 8% / 0.7) 0%,
+      hsl(0 0% 5% / 0.5) 100%
     );
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid hsl(0 0% 100% / 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(0 0% 100% / 0.08);
     box-shadow: 
-      0 8px 32px hsl(0 0% 0% / 0.2),
-      inset 0 1px 0 hsl(0 0% 100% / 0.1);
+      0 8px 32px hsl(0 0% 0% / 0.3),
+      inset 0 1px 0 hsl(0 0% 100% / 0.05);
   }
 
   .glass-card-strong {
     @apply rounded-xl;
     background: linear-gradient(
       135deg,
-      hsl(0 0% 100% / 0.08) 0%,
-      hsl(0 0% 100% / 0.03) 100%
+      hsl(0 0% 10% / 0.85) 0%,
+      hsl(0 0% 6% / 0.75) 100%
     );
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border: 1px solid hsl(0 0% 100% / 0.15);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid hsl(0 0% 100% / 0.1);
     box-shadow: 
-      0 16px 48px hsl(0 0% 0% / 0.25),
-      inset 0 1px 0 hsl(0 0% 100% / 0.12);
+      0 16px 48px hsl(0 0% 0% / 0.4),
+      inset 0 1px 0 hsl(0 0% 100% / 0.08);
   }
 
   /* Subtle glow */
