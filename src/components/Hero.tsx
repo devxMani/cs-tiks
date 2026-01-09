@@ -49,17 +49,19 @@ const FlowingLines = () => (
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
-      {/* Background Image */}
+      {/* Background Image - full cover */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0"
         style={{ 
           backgroundImage: `url(${heroBg})`,
-          backgroundPosition: 'center center'
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat'
         }}
       />
       {/* Lighter gradient overlays for better visibility */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/50 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-background/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-background/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-background/20" />
       <FlowingLines />
 
       <div className="container relative z-10 px-6">
