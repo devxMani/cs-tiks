@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const FlowingLines = () => (
@@ -47,19 +48,27 @@ const FlowingLines = () => (
 );
 
 const Hero = () => {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
-      {/* Background Image - full cover */}
-      <div 
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
+      {/* Background Image with parallax */}
+      <motion.div 
         className="absolute inset-0"
         style={{ 
           backgroundImage: `url(${heroBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat'
+          backgroundRepeat: 'no-repeat',
+          y
         }}
       />
-      {/* Lighter gradient overlays for better visibility */}
+      {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-background/30 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-background/20" />
       <FlowingLines />
