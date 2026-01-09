@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const FlowingLines = () => (
   <svg
-    className="absolute inset-0 w-full h-full opacity-30"
+    className="absolute inset-0 w-full h-full opacity-20"
     viewBox="0 0 1200 800"
     fill="none"
     preserveAspectRatio="xMidYMid slice"
   >
-    {/* Flowing curves */}
     <path
       d="M-100 400 Q 200 200, 400 400 T 800 400 T 1300 300"
       stroke="url(#gradient1)"
@@ -49,8 +49,12 @@ const FlowingLines = () => (
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
-      {/* Background elements */}
-      <div className="absolute inset-0 dot-pattern opacity-20" />
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-right bg-no-repeat opacity-40"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
       <FlowingLines />
 
       <div className="container relative z-10 px-6">
@@ -74,7 +78,7 @@ const Hero = () => {
             <div className="space-y-2">
               <h1 className="animate-clip-text delay-100">
                 <span className="block text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[0.9]">
-                  Sharpen
+                  Master
                 </span>
               </h1>
               <div className="flex items-center gap-4 animate-clip-text delay-200">
@@ -84,12 +88,12 @@ const Hero = () => {
                 <div className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/50">
                   <span className="text-xs text-muted-foreground">With</span>
                   <span className="text-xs font-medium">DuelSync™</span>
-                  <span className="text-xs text-muted-foreground">Technology</span>
+                  <span className="text-xs text-muted-foreground">Tech</span>
                 </div>
               </div>
               <h1 className="animate-clip-text delay-300">
                 <span className="block text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[0.9]">
-                  Skills
+                  CS Skills
                 </span>
               </h1>
             </div>
@@ -101,15 +105,15 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="text-muted-foreground max-w-md text-sm leading-relaxed"
             >
-              Master computer science through real-time duels. Challenge opponents,
-              solve problems under pressure, and climb the global rankings.
+              A clean CS quiz platform with Practice Mode, 1v1 Duels, and Leaderboard.
+              Pick a topic, answer questions, challenge opponents.
             </motion.p>
           </div>
 
           {/* Right bento grid */}
           <div className="lg:col-span-5">
             <div className="bento-grid grid-cols-2 grid-rows-3 h-[500px]">
-              {/* Skill Hub card */}
+              {/* Practice card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -118,7 +122,7 @@ const Hero = () => {
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                    Skill Hub
+                    Practice
                   </span>
                   <div className="flex gap-1">
                     <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30" />
@@ -127,7 +131,7 @@ const Hero = () => {
                 </div>
                 <div className="mt-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-muted to-accent flex items-center justify-center">
-                    <span className="text-xl">⚡</span>
+                    <span className="text-xl">⌘</span>
                   </div>
                 </div>
               </motion.div>
@@ -145,11 +149,11 @@ const Hero = () => {
                   </span>
                   <div className="mt-6 space-y-4">
                     <div>
-                      <span className="text-3xl font-light">500+</span>
+                      <span className="text-3xl font-light">100+</span>
                       <p className="text-[10px] text-muted-foreground mt-1">Questions</p>
                     </div>
                     <div>
-                      <span className="text-3xl font-light">12</span>
+                      <span className="text-3xl font-light">4</span>
                       <p className="text-[10px] text-muted-foreground mt-1">Topics</p>
                     </div>
                   </div>
@@ -160,21 +164,21 @@ const Hero = () => {
                 </div>
               </motion.div>
 
-              {/* Mind Forge card */}
+              {/* Quick Duel card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="col-span-1 row-span-1 glass-card p-4"
               >
-                <span className="text-lg font-light">Mind Forge</span>
-                <p className="text-[10px] text-muted-foreground mt-1">Syncing...</p>
+                <span className="text-lg font-light">Quick Duel</span>
+                <p className="text-[10px] text-muted-foreground mt-1">5 Questions • 20s Timer</p>
                 <div className="mt-3 w-full h-1 bg-muted rounded-full overflow-hidden">
                   <div className="h-full w-2/3 bg-foreground/30 rounded-full" />
                 </div>
               </motion.div>
 
-              {/* Core link visualization */}
+              {/* Matchmaking visualization */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -207,10 +211,14 @@ const Hero = () => {
                     />
                   </svg>
                 </div>
-                <div className="relative z-10">
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                    Core_Link
-                  </span>
+                <div className="relative z-10 flex justify-between items-center">
+                  <div>
+                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                      Matchmaking
+                    </span>
+                    <p className="text-xs mt-1">Random Opponent • Same Questions</p>
+                  </div>
+                  <span className="text-[10px] text-emerald-500">LIVE</span>
                 </div>
               </motion.div>
             </div>
@@ -226,18 +234,18 @@ const Hero = () => {
         >
           <div className="flex items-center gap-8">
             <div>
-              <span className="block text-2xl font-light">FOR FLUID</span>
-              <span className="block text-2xl font-light text-muted-foreground">PRECISION AND CORE</span>
-              <span className="block text-2xl font-light">CS MASTERY</span>
+              <span className="block text-2xl font-light">PRACTICE</span>
+              <span className="block text-2xl font-light text-muted-foreground">COMPETE</span>
+              <span className="block text-2xl font-light">CLIMB</span>
             </div>
           </div>
           <div className="flex items-center gap-4">
             <span className="px-3 py-1 text-[10px] uppercase tracking-wider border border-border rounded-full">
-              Practice-First
+              10 Questions
             </span>
             <span className="text-muted-foreground">—</span>
             <span className="px-3 py-1 text-[10px] uppercase tracking-wider border border-border rounded-full">
-              Compete-Often
+              20s Per Question
             </span>
           </div>
         </motion.div>

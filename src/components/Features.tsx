@@ -41,18 +41,18 @@ const Features = () => {
                   <span className="text-lg">⌘</span>
                 </div>
               </div>
-              <h3 className="text-2xl md:text-3xl font-light mb-3">Solo Practice</h3>
+              <h3 className="text-2xl md:text-3xl font-light mb-3">Solo Practice Mode</h3>
               <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
-                Sharpen your skills with curated questions across Data Structures,
-                Algorithms, System Design, and more.
+                Pick a topic (DSA, DBMS, OS, Networks). Get 10 random questions.
+                Immediate feedback with correct answers and explanations.
               </p>
             </div>
             <div className="flex items-center gap-4 mt-6">
               <span className="px-3 py-1 text-[10px] uppercase tracking-wider border border-border rounded-full">
-                500+ Questions
+                10 Questions
               </span>
               <span className="px-3 py-1 text-[10px] uppercase tracking-wider border border-border rounded-full">
-                12 Topics
+                Instant Feedback
               </span>
             </div>
           </motion.div>
@@ -74,9 +74,10 @@ const Features = () => {
                   <span className="text-lg">⚔</span>
                 </div>
               </div>
-              <h3 className="text-xl font-light mb-3">1v1 Duels</h3>
+              <h3 className="text-xl font-light mb-3">1v1 Quick Duel</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Challenge opponents to real-time quiz battles. Answer faster, score higher.
+                Random matchmaking. Same 5 questions for both players. 
+                20 seconds per question. Winner takes points.
               </p>
             </div>
             <div className="flex items-center gap-2 mt-6">
@@ -104,7 +105,7 @@ const Features = () => {
               </div>
               <h3 className="text-xl font-light mb-3">Leaderboard</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Track progress, earn badges, and climb the global rankings.
+                Top 50 players. Sort by total wins or accuracy. Track your progress and climb the ranks.
               </p>
             </div>
             <div className="mt-6 space-y-2">
@@ -116,30 +117,54 @@ const Features = () => {
             </div>
           </motion.div>
 
-          {/* Wide info card */}
+          {/* Profile card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="md:col-span-2 glass-card p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+          >
+            <div className="flex items-center gap-6">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-muted to-accent flex items-center justify-center">
+                <span className="text-2xl">◈</span>
+              </div>
+              <div>
+                <h3 className="text-xl font-light">Simple Profile</h3>
+                <p className="text-sm text-muted-foreground">Username, avatar, win/loss record, accuracy %</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 text-[10px] uppercase tracking-wider">
+              <span className="text-muted-foreground">Total Matches</span>
+              <span className="text-muted-foreground">—</span>
+              <span className="text-muted-foreground">Topic-wise Scores</span>
+            </div>
+          </motion.div>
+
+          {/* Free tier card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="md:col-span-2 lg:col-span-4 glass-card p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+            className="md:col-span-2 glass-card p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
           >
             <div className="flex items-center gap-6">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-muted to-accent flex items-center justify-center">
                 <span className="text-2xl">∞</span>
               </div>
               <div>
-                <h3 className="text-xl font-light">Unlimited Duels</h3>
-                <p className="text-sm text-muted-foreground">Practice and compete as much as you want</p>
+                <h3 className="text-xl font-light">100% Free Forever</h3>
+                <p className="text-sm text-muted-foreground">No credit card required. No hidden limits.</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                Always Free
+                Unlimited Practice
               </span>
               <span className="text-muted-foreground">—</span>
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                No Limits
+                Unlimited Duels
               </span>
             </div>
           </motion.div>

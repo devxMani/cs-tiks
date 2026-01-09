@@ -10,12 +10,15 @@ const Footer = () => {
             <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center">
               <span className="text-background text-sm font-semibold">//</span>
             </div>
-            <span className="text-sm font-medium tracking-tight">CS_DUELS</span>
+            <div>
+              <span className="text-sm font-medium tracking-tight block">CS_DUELS</span>
+              <span className="text-[10px] text-muted-foreground">Clean CS Quiz Platform</span>
+            </div>
           </div>
 
           {/* Links */}
           <nav className="flex flex-wrap items-center gap-6 md:gap-8">
-            {["About", "GitHub", "Discord", "Contact"].map((item) => (
+            {["Practice", "Duel", "Leaderboard", "Profile", "GitHub"].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -32,9 +35,21 @@ const Footer = () => {
               © 2026 CS_DUELS
             </span>
             <span className="text-[10px] text-muted-foreground uppercase tracking-wider">
-              V_1.0.0
+              Built with Next.js + Prisma
             </span>
           </div>
+        </div>
+
+        {/* Tech stack */}
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          {["TypeScript", "Tailwind", "PostgreSQL", "NextAuth", "Vercel"].map((tech) => (
+            <span
+              key={tech}
+              className="px-3 py-1 text-[10px] uppercase tracking-wider border border-border rounded-full text-muted-foreground"
+            >
+              {tech}
+            </span>
+          ))}
         </div>
 
         {/* Bottom decorative element */}

@@ -26,7 +26,7 @@ const CTA = () => {
           </h2>
 
           <p className="text-muted-foreground mb-12 text-sm max-w-md mx-auto">
-            Join now. It's free forever. No credit card required.
+            Sign up with email or Google OAuth. Free forever. Start practicing, start dueling.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -35,7 +35,7 @@ const CTA = () => {
               whileTap={{ scale: 0.98 }}
               className="px-8 py-4 text-sm font-medium bg-foreground text-background rounded-full hover:bg-foreground/90 transition-colors"
             >
-              Create Account
+              Sign Up Free
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.02 }}
@@ -46,26 +46,37 @@ const CTA = () => {
             </motion.button>
           </div>
 
+          {/* Flow steps */}
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-4 text-[10px] uppercase tracking-wider text-muted-foreground">
+            <span className="px-3 py-1 border border-border rounded-full">1. Sign Up</span>
+            <span>→</span>
+            <span className="px-3 py-1 border border-border rounded-full">2. Pick Topic</span>
+            <span>→</span>
+            <span className="px-3 py-1 border border-border rounded-full">3. Practice or Duel</span>
+            <span>→</span>
+            <span className="px-3 py-1 border border-border rounded-full">4. Climb Ranks</span>
+          </div>
+
           {/* Stats row */}
-          <div className="mt-16 flex items-center justify-center gap-8 md:gap-16">
+          <div className="mt-12 flex items-center justify-center gap-8 md:gap-16">
             <div className="text-center">
-              <span className="block text-2xl md:text-3xl font-light">10K+</span>
+              <span className="block text-2xl md:text-3xl font-light">4</span>
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                Users
+                Core Topics
               </span>
             </div>
             <div className="w-px h-8 bg-border" />
             <div className="text-center">
-              <span className="block text-2xl md:text-3xl font-light">50K+</span>
+              <span className="block text-2xl md:text-3xl font-light">120+</span>
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                Duels
+                Questions
               </span>
             </div>
             <div className="w-px h-8 bg-border" />
             <div className="text-center">
-              <span className="block text-2xl md:text-3xl font-light">95%</span>
+              <span className="block text-2xl md:text-3xl font-light">100%</span>
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                Satisfaction
+                Free
               </span>
             </div>
           </div>
