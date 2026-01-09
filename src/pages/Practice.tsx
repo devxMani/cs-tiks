@@ -71,23 +71,23 @@ const Practice = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="max-w-xl mb-12"
               >
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border/60 bg-card/50 mb-6">
+                <span className="status-badge mb-6 inline-flex">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   Practice Mode
                 </span>
-                <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-3">
+                <h1 className="section-header mb-4">
                   Solo Practice
                 </h1>
-                <p className="text-muted-foreground">
+                <p className="section-subheader">
                   {totalQuestions}+ questions across {topics.length} topics. No timer, instant feedback.
                 </p>
               </motion.div>
 
               {/* Topic grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 max-w-5xl">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-5xl">
                 {topics.map((topic, index) => {
                   const Icon = topic.icon;
                   const count = getTopicQuestionCount(topic.id);
@@ -95,20 +95,20 @@ const Practice = () => {
                   return (
                     <motion.button
                       key={topic.id}
-                      initial={{ opacity: 0, y: 15 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.04 }}
+                      transition={{ duration: 0.5, delay: index * 0.05 }}
                       onClick={() => startPractice(topic.id)}
-                      className="group p-4 rounded-xl border border-border/50 bg-card/20 hover:bg-card/50 hover:border-border text-left transition-all"
+                      className="group glass-card-hover p-5 text-left"
                     >
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="w-9 h-9 rounded-lg bg-muted/50 flex items-center justify-center group-hover:bg-muted transition-colors">
-                          <Icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-10 h-10 rounded-xl glass-card-subtle flex items-center justify-center group-hover:bg-foreground/10 transition-colors">
+                          <Icon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                         </div>
-                        <span className="text-[10px] text-muted-foreground">{count}Q</span>
+                        <span className="text-[10px] text-muted-foreground font-medium">{count}Q</span>
                       </div>
-                      <span className="block text-sm font-medium mb-0.5">{topic.name}</span>
-                      <span className="flex items-center text-[10px] text-muted-foreground group-hover:text-foreground/70 transition-colors">
+                      <span className="block text-sm font-medium mb-1">{topic.name}</span>
+                      <span className="flex items-center text-[11px] text-muted-foreground group-hover:text-foreground/70 transition-colors">
                         Start
                         <ArrowRight className="w-3 h-3 ml-1 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                       </span>
@@ -121,8 +121,8 @@ const Practice = () => {
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="mt-10 text-sm text-muted-foreground"
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="mt-10 text-sm text-muted-foreground glass-card-subtle inline-block px-4 py-2"
               >
                 💡 Pick a topic to start practicing. 10 random questions each session.
               </motion.p>
@@ -131,9 +131,10 @@ const Practice = () => {
 
           {gameState === "playing" && currentQuestions.length > 0 && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="max-w-3xl mx-auto p-6 md:p-8 rounded-xl border border-border/50 bg-card/20"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="max-w-3xl mx-auto glass-card-strong p-6 md:p-8"
             >
               <QuizGame
                 questions={currentQuestions}
@@ -146,9 +147,10 @@ const Practice = () => {
 
           {gameState === "results" && results && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="max-w-3xl mx-auto p-6 md:p-8 rounded-xl border border-border/50 bg-card/20"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="max-w-3xl mx-auto glass-card-strong p-6 md:p-8"
             >
               <QuizResultsView
                 results={results}

@@ -18,17 +18,17 @@ const Navbar = () => {
 
   return (
     <motion.header
-      initial={{ opacity: 0, y: -10 }}
+      initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="fixed top-0 left-0 right-0 z-50"
     >
       <div className="mx-auto max-w-6xl px-4 py-4">
-        <div className="flex items-center justify-between rounded-full border border-border/40 bg-background/80 backdrop-blur-xl px-5 py-2.5">
+        <div className="glass-card flex items-center justify-between px-5 py-2.5">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-md bg-foreground flex items-center justify-center">
-              <span className="text-background text-xs font-semibold">//</span>
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center transition-transform group-hover:scale-105">
+              <span className="text-background text-xs font-bold tracking-tighter">//</span>
             </div>
             <span className="text-sm font-medium tracking-tight hidden sm:block">CS_DUELS</span>
           </Link>
@@ -39,10 +39,10 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`px-3.5 py-1.5 text-sm rounded-full transition-colors ${
+                className={`px-4 py-2 text-sm rounded-lg transition-all duration-300 ${
                   isActive(item.path)
-                    ? "bg-accent text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "bg-foreground/10 text-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
                 }`}
               >
                 {item.name}
@@ -51,23 +51,23 @@ const Navbar = () => {
           </nav>
 
           {/* CTA */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <Link
               to="/login"
-              className="hidden sm:block px-3.5 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="hidden sm:block px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Login
             </Link>
             <Link
               to="/signup"
-              className="px-4 py-1.5 text-sm font-medium bg-foreground text-background rounded-full hover:bg-foreground/90 transition-colors"
+              className="glass-button !py-2 !px-5"
             >
               Sign Up
             </Link>
             
             {/* Mobile menu button */}
             <button
-              className="md:hidden p-1.5 -mr-1"
+              className="md:hidden p-2 rounded-lg hover:bg-foreground/5 transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -80,7 +80,8 @@ const Navbar = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden mt-2 p-4 rounded-xl border border-border/40 bg-background/95 backdrop-blur-xl"
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden mt-2 glass-card-strong p-4"
           >
             <nav className="flex flex-col gap-1">
               {navLinks.map((item) => (
@@ -88,20 +89,20 @@ const Navbar = () => {
                   key={item.name}
                   to={item.path}
                   onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-2.5 text-sm rounded-lg transition-colors ${
+                  className={`px-4 py-3 text-sm rounded-lg transition-all ${
                     isActive(item.path)
-                      ? "bg-accent text-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                      ? "bg-foreground/10 text-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
                   }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="h-px bg-border my-2" />
+              <div className="glass-divider my-3" />
               <Link
                 to="/login"
                 onClick={() => setMobileOpen(false)}
-                className="px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="px-4 py-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Login
               </Link>

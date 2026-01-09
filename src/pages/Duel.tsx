@@ -102,17 +102,17 @@ const Duel = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   className="max-w-xl mb-10"
                 >
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border/60 bg-card/50 mb-6">
+                  <span className="status-badge mb-6 inline-flex">
                     <Swords className="w-3 h-3 text-red-400" />
                     1v1 Duel
                   </span>
-                  <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-3">
+                  <h1 className="section-header mb-4">
                     Quick Duel
                   </h1>
-                  <p className="text-muted-foreground">
+                  <p className="section-subheader">
                     Face a random opponent. Same questions, same time. Best score wins.
                   </p>
                 </motion.div>
@@ -122,19 +122,19 @@ const Duel = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="max-w-lg p-8 rounded-xl border border-border/50 bg-card/20 mb-8"
+                  className="max-w-lg glass-card-strong p-8 mb-8"
                 >
                   {/* VS */}
                   <div className="flex items-center justify-center gap-8 mb-8">
                     <div className="text-center">
-                      <div className="w-16 h-16 rounded-full border-2 border-emerald-500/30 bg-emerald-500/10 flex items-center justify-center mb-2 mx-auto">
+                      <div className="w-16 h-16 rounded-2xl glass-card flex items-center justify-center mb-3 mx-auto glow-green">
                         <span className="text-2xl">⚔️</span>
                       </div>
                       <span className="text-sm">You</span>
                     </div>
-                    <span className="text-2xl font-bold text-muted-foreground">VS</span>
+                    <span className="text-2xl font-light text-muted-foreground">VS</span>
                     <div className="text-center">
-                      <div className="w-16 h-16 rounded-full border-2 border-dashed border-border flex items-center justify-center mb-2 mx-auto">
+                      <div className="w-16 h-16 rounded-2xl glass-card-subtle flex items-center justify-center mb-3 mx-auto border-dashed">
                         <span className="text-2xl text-muted-foreground">?</span>
                       </div>
                       <span className="text-sm text-muted-foreground">Opponent</span>
@@ -143,7 +143,7 @@ const Duel = () => {
 
                   <button
                     onClick={startSearch}
-                    className="w-full py-3.5 text-sm font-medium bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-colors flex items-center justify-center gap-2"
+                    className="w-full glass-button flex items-center justify-center gap-2"
                   >
                     <Swords className="w-4 h-4" />
                     Find Opponent
@@ -155,7 +155,7 @@ const Duel = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mb-10"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mb-10"
                 >
                   {[
                     { icon: Target, value: "5", label: "Questions" },
@@ -165,10 +165,10 @@ const Duel = () => {
                   ].map((item, i) => {
                     const Icon = item.icon;
                     return (
-                      <div key={i} className="p-4 rounded-xl border border-border/50 bg-card/20 text-center">
+                      <div key={i} className="glass-card p-4 text-center">
                         <Icon className="w-5 h-5 mx-auto mb-2 text-muted-foreground" />
-                        <span className="text-lg font-light block">{item.value}</span>
-                        <p className="text-[10px] text-muted-foreground">{item.label}</p>
+                        <span className="text-xl font-light block">{item.value}</span>
+                        <p className="text-[10px] text-muted-foreground mt-1">{item.label}</p>
                       </div>
                     );
                   })}
@@ -181,7 +181,7 @@ const Duel = () => {
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="max-w-lg"
                 >
-                  <h2 className="text-sm text-muted-foreground mb-3 flex items-center gap-2">
+                  <h2 className="text-sm text-muted-foreground mb-4 flex items-center gap-2">
                     <Users className="w-4 h-4" />
                     Recent Duels
                   </h2>
@@ -189,10 +189,10 @@ const Duel = () => {
                     {recentDuels.map((duel, i) => (
                       <div
                         key={i}
-                        className="flex items-center justify-between p-3 rounded-lg border border-border/50 bg-card/10"
+                        className="glass-card-subtle flex items-center justify-between p-4"
                       >
                         <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                          <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${
                             duel.result === "won" ? "bg-emerald-500/10" : "bg-red-500/10"
                           }`}>
                             {duel.result === "won" ? <Crown className="w-4 h-4 text-emerald-500" /> : <span className="text-red-400 text-sm">✗</span>}
@@ -202,7 +202,7 @@ const Duel = () => {
                             <p className="text-[10px] text-muted-foreground">#{duel.rank} • {duel.time}</p>
                           </div>
                         </div>
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${
+                        <span className={`text-xs px-3 py-1 rounded-full ${
                           duel.result === "won"
                             ? "bg-emerald-500/10 text-emerald-500"
                             : "bg-red-500/10 text-red-400"
@@ -226,19 +226,19 @@ const Duel = () => {
               >
                 <div className="text-center">
                   <motion.div
-                    className="w-24 h-24 rounded-full border-2 border-dashed border-border mx-auto mb-6 flex items-center justify-center"
+                    className="w-24 h-24 rounded-2xl glass-card mx-auto mb-6 flex items-center justify-center"
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                   >
-                    <Swords className="w-8 h-8 text-muted-foreground" />
+                    <Swords className="w-10 h-10 text-muted-foreground" />
                   </motion.div>
                   <h2 className="text-xl font-light mb-2">
                     {searchProgress < 100 ? "Finding opponent..." : `Found: ${opponentName}`}
                   </h2>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-sm text-muted-foreground mb-6">
                     {searchProgress < 100 ? "Matching you with a challenger" : `Rank #${opponentRank}`}
                   </p>
-                  <div className="w-48 h-1.5 bg-muted rounded-full overflow-hidden mx-auto">
+                  <div className="w-48 h-1.5 glass-card-subtle rounded-full overflow-hidden mx-auto">
                     <motion.div
                       className="h-full bg-foreground/60 rounded-full"
                       animate={{ width: `${Math.min(searchProgress, 100)}%` }}
@@ -246,7 +246,7 @@ const Duel = () => {
                   </div>
                   <button
                     onClick={handleExit}
-                    className="mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="mt-8 text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     Cancel
                   </button>
@@ -285,19 +285,19 @@ const Duel = () => {
                 exit={{ opacity: 0 }}
                 className="max-w-3xl mx-auto"
               >
-                <div className="p-3 mb-4 rounded-lg border border-border/50 bg-card/20 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-sm">⚔️</div>
+                <div className="glass-card p-4 mb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center text-sm">⚔️</div>
                     <span className="text-sm">You</span>
                   </div>
                   <span className="text-sm font-medium text-muted-foreground">VS</span>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3">
                     <span className="text-sm">{opponentName}</span>
-                    <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center text-sm">🎯</div>
+                    <div className="w-9 h-9 rounded-xl bg-red-500/10 flex items-center justify-center text-sm">🎯</div>
                   </div>
                 </div>
                 
-                <div className="p-6 md:p-8 rounded-xl border border-border/50 bg-card/20">
+                <div className="glass-card-strong p-6 md:p-8">
                   <QuizGame
                     questions={currentQuestions}
                     mode="duel"
@@ -315,7 +315,7 @@ const Duel = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="max-w-3xl mx-auto p-6 md:p-8 rounded-xl border border-border/50 bg-card/20"
+                className="max-w-3xl mx-auto glass-card-strong p-6 md:p-8"
               >
                 <div className="text-center mb-6">
                   <motion.div
@@ -324,17 +324,17 @@ const Duel = () => {
                     transition={{ type: "spring", duration: 0.5 }}
                   >
                     {results.accuracy >= 60 ? (
-                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                      <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
                         <Trophy className="w-5 h-5 text-emerald-500" />
                         <span className="text-emerald-500 font-medium">Victory!</span>
                       </div>
                     ) : (
-                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20">
+                      <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-500/10 border border-red-500/20">
                         <span className="text-red-400 font-medium">Defeat</span>
                       </div>
                     )}
                   </motion.div>
-                  <p className="text-sm text-muted-foreground mt-2">vs {opponentName}</p>
+                  <p className="text-sm text-muted-foreground mt-3">vs {opponentName}</p>
                 </div>
 
                 <QuizResultsView

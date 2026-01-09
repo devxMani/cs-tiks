@@ -115,19 +115,19 @@ const QuizGame = ({ questions, timePerQuestion = 20, onComplete, onExit, mode }:
   const getOptionStyle = (index: number) => {
     if (!isAnswered) {
       return selectedAnswer === index 
-        ? "border-foreground bg-foreground/10" 
-        : "border-border hover:border-foreground/50 hover:bg-foreground/5";
+        ? "glass-card-strong border-foreground/20" 
+        : "glass-card-subtle hover:bg-foreground/[0.03]";
     }
     
     if (index === currentQuestion.correctAnswer) {
-      return "border-emerald-500 bg-emerald-500/10 text-emerald-400";
+      return "glass-card border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
     }
     
     if (index === selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer) {
-      return "border-red-500 bg-red-500/10 text-red-400";
+      return "glass-card border-red-500/30 bg-red-500/10 text-red-400";
     }
     
-    return "border-border/50 opacity-50";
+    return "glass-card-subtle opacity-50";
   };
 
   return (
