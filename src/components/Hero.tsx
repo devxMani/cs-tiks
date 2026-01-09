@@ -54,12 +54,12 @@ const Hero = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ 
           backgroundImage: `url(${heroBg})`,
-          backgroundPosition: '70% center'
+          backgroundPosition: 'center center'
         }}
       />
-      {/* Gradient overlays for readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
+      {/* Lighter gradient overlays for better visibility */}
+      <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-background/30" />
       <FlowingLines />
 
       <div className="container relative z-10 px-6">
