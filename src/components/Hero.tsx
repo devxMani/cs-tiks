@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Cpu, Zap, Brain, Code2 } from "lucide-react";
+import heroIllustration from "@/assets/hero-illustration.png";
 
 const Hero = () => {
   return (
@@ -95,13 +96,17 @@ const Hero = () => {
 
           {/* Center Column - Image/Visual Area */}
           <div className="lg:col-span-3 flex items-center justify-center py-8 lg:py-0">
-            <div className="animate-clip-img delay-500 relative w-full max-w-[280px] aspect-[3/4] rounded-2xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-muted/30 to-background border border-border/50 rounded-2xl">
-                <div className="absolute inset-0 dot-pattern opacity-30" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="h-1 bg-border/30 rounded-full overflow-hidden">
-                    <div className="h-full w-2/3 bg-foreground/20 rounded-full animate-pulse-slow" />
-                  </div>
+            <div className="animate-clip-img delay-500 relative w-full max-w-[280px] aspect-[3/4] rounded-2xl overflow-hidden glow-subtle">
+              <img 
+                src={heroIllustration} 
+                alt="Neural network brain illustration" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <p className="text-[10px] font-mono tracking-wider text-muted-foreground mb-2">NEURAL_SYNC</p>
+                <div className="h-1 bg-border/30 rounded-full overflow-hidden">
+                  <div className="h-full w-2/3 bg-foreground/30 rounded-full animate-pulse-slow" />
                 </div>
               </div>
             </div>
