@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import heroBg from "@/assets/hero-bg.jpg";
+import background from "@/assets/background.jpg";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,10 +9,17 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [scrollY, setScrollY] = useState(0);
+  const ticking = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking.current = false;
+        });
+        ticking.current = true;
+      }
     };
     
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -20,21 +27,31 @@ const Layout = ({ children }: LayoutProps) => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-background">
-      {/* Global parallax background */}
-      <div 
-        className="fixed inset-0 z-0 will-change-transform"
-        style={{ 
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-          transform: `translateY(${scrollY * 0.3}px) scale(1.1)`,
+    <div className="relative min-h-screen bg-background overflow-x-hidden">
+      {/* Fixed parallax background container */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <div 
+          className="absolute inset-0 w-full h-[120%] will-change-transform"
+          style={{ 
+            backgroundImage: `url(${background})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center top',
+            backgroundRepeat: 'no-repeat',
+            transform: `translate3d(0, ${-scrollY * 0.5}px, 0)`,
+          }}
+        />
+      </div>
+      
+      {/* Gradient overlays for readability */}
+      <div className="fixed inset-0 z-0 bg-gradient-to-b from-background/40 via-background/60 to-background/95" />
+      <div className="fixed inset-0 z-0 bg-gradient-to-r from-background/80 via-transparent to-background/80" />
+      
+      {/* Subtle vignette effect */}
+      <div className="fixed inset-0 z-0 pointer-events-none" 
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 0%, hsl(var(--background) / 0.4) 100%)'
         }}
       />
-      {/* Global gradient overlays */}
-      <div className="fixed inset-0 z-0 bg-gradient-to-r from-background/70 via-background/40 to-transparent" />
-      <div className="fixed inset-0 z-0 bg-gradient-to-t from-background/80 via-background/30 to-background/20" />
       
       {/* Content */}
       <div className="relative z-10">
