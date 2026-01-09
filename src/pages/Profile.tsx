@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
-import { BookOpen, Swords, Trophy, Settings } from "lucide-react";
+import { BookOpen, Swords, Trophy, Settings, TrendingUp } from "lucide-react";
 
 const Profile = () => {
   const stats = {
@@ -35,24 +35,24 @@ const Profile = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10 p-6 rounded-xl border border-border/50 bg-card/20"
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="glass-card-strong flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10 p-6"
           >
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-muted/50 flex items-center justify-center text-2xl">
+              <div className="w-16 h-16 rounded-2xl glass-card flex items-center justify-center text-2xl">
                 👤
               </div>
               <div>
-                <div className="flex items-center gap-2 mb-1">
+                <div className="flex items-center gap-3 mb-1">
                   <h1 className="text-xl font-medium">Guest_User</h1>
-                  <span className="px-2 py-0.5 text-[9px] uppercase tracking-wider rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+                  <span className="px-2.5 py-1 text-[9px] uppercase tracking-wider rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
                     Online
                   </span>
                 </div>
-                <p className="text-sm text-muted-foreground">Rank #{stats.rank} • {stats.streak} win streak</p>
+                <p className="text-sm text-muted-foreground">Rank #{stats.rank} • {stats.streak} win streak 🔥</p>
               </div>
             </div>
-            <button className="flex items-center gap-2 px-4 py-2 text-sm border border-border rounded-lg hover:bg-accent transition-colors">
+            <button className="glass-button-outline flex items-center gap-2 !py-2.5">
               <Settings className="w-4 h-4" />
               Edit Profile
             </button>
@@ -63,7 +63,7 @@ const Profile = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10"
           >
             {[
               { value: stats.wins, label: "Wins", color: "text-emerald-500" },
@@ -71,10 +71,16 @@ const Profile = () => {
               { value: `${stats.accuracy}%`, label: "Accuracy", color: "" },
               { value: stats.totalQuestions, label: "Questions", color: "" },
             ].map((stat, i) => (
-              <div key={stat.label} className="p-4 rounded-xl border border-border/50 bg-card/20 text-center">
-                <span className={`text-2xl font-light ${stat.color}`}>{stat.value}</span>
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">{stat.label}</p>
-              </div>
+              <motion.div 
+                key={stat.label} 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.05 }}
+                className="glass-card p-5 text-center"
+              >
+                <span className={`text-3xl font-light ${stat.color}`}>{stat.value}</span>
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-2">{stat.label}</p>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -86,22 +92,25 @@ const Profile = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="p-6 rounded-xl border border-border/50 bg-card/20"
+                className="glass-card-strong p-6"
               >
-                <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-4">Topic Performance</h2>
-                <div className="space-y-4">
-                  {topicStats.map((topic) => (
+                <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-5 flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4" />
+                  Topic Performance
+                </h2>
+                <div className="space-y-5">
+                  {topicStats.map((topic, index) => (
                     <div key={topic.name}>
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-sm">{topic.name}</span>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium">{topic.name}</span>
                         <span className="text-sm text-muted-foreground">{topic.accuracy}%</span>
                       </div>
-                      <div className="h-1.5 bg-muted/50 rounded-full overflow-hidden">
+                      <div className="h-2 glass-card-subtle rounded-full overflow-hidden">
                         <motion.div
-                          className="h-full bg-foreground/60 rounded-full"
+                          className="h-full bg-gradient-to-r from-foreground/40 to-foreground/60 rounded-full"
                           initial={{ width: 0 }}
                           animate={{ width: `${topic.accuracy}%` }}
-                          transition={{ duration: 0.8, delay: 0.3 }}
+                          transition={{ duration: 0.8, delay: 0.3 + index * 0.1 }}
                         />
                       </div>
                     </div>
@@ -114,17 +123,17 @@ const Profile = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className="p-6 rounded-xl border border-border/50 bg-card/20"
+                className="glass-card-strong p-6"
               >
-                <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-4">Recent Activity</h2>
+                <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-5">Recent Activity</h2>
                 <div className="space-y-3">
                   {recentActivity.map((activity, i) => (
                     <div
                       key={i}
-                      className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/20 transition-colors"
+                      className="glass-card-subtle flex items-center justify-between p-4 hover:bg-foreground/[0.02] transition-colors"
                     >
                       <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
                           activity.type === "duel" ? "bg-red-500/10" : "bg-blue-500/10"
                         }`}>
                           {activity.type === "duel" ? "⚔️" : "📚"}
@@ -136,10 +145,10 @@ const Profile = () => {
                           <p className="text-xs text-muted-foreground">{activity.time}</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-3">
                         <span className="text-sm text-muted-foreground">{activity.score}</span>
                         {activity.type === "duel" && (
-                          <span className={`text-[10px] px-2 py-0.5 rounded-full ${
+                          <span className={`text-[10px] px-2.5 py-1 rounded-full ${
                             activity.result === "won"
                               ? "bg-emerald-500/10 text-emerald-500"
                               : "bg-red-500/10 text-red-400"
@@ -161,8 +170,8 @@ const Profile = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="space-y-6"
             >
-              <div className="p-6 rounded-xl border border-border/50 bg-card/20">
-                <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-4">Quick Actions</h2>
+              <div className="glass-card-strong p-6">
+                <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-5">Quick Actions</h2>
                 <div className="space-y-2">
                   {[
                     { to: "/practice", icon: BookOpen, label: "Start Practice" },
@@ -174,9 +183,9 @@ const Profile = () => {
                       <Link
                         key={item.to}
                         to={item.to}
-                        className="flex items-center gap-3 p-3 rounded-lg border border-border/50 hover:bg-accent transition-colors"
+                        className="glass-card-subtle flex items-center gap-3 p-4 hover:bg-foreground/[0.03] transition-all group"
                       >
-                        <Icon className="w-4 h-4 text-muted-foreground" />
+                        <Icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
                         <span className="text-sm">{item.label}</span>
                       </Link>
                     );
@@ -185,12 +194,12 @@ const Profile = () => {
               </div>
 
               {/* Win rate */}
-              <div className="p-6 rounded-xl border border-border/50 bg-card/20">
-                <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-4">Win Rate</h2>
-                <div className="flex items-center gap-4">
+              <div className="glass-card-strong p-6">
+                <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-5">Win Rate</h2>
+                <div className="flex items-center gap-5">
                   <div className="relative w-20 h-20">
                     <svg className="w-20 h-20 -rotate-90" viewBox="0 0 100 100">
-                      <circle cx="50" cy="50" r="40" fill="none" stroke="hsl(var(--muted))" strokeWidth="8" />
+                      <circle cx="50" cy="50" r="40" fill="none" stroke="hsl(var(--muted) / 0.3)" strokeWidth="8" />
                       <circle
                         cx="50"
                         cy="50"
@@ -208,9 +217,9 @@ const Profile = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="text-sm">
-                    <p><span className="text-emerald-500">{stats.wins}</span> wins</p>
-                    <p><span className="text-red-400">{stats.losses}</span> losses</p>
+                  <div className="text-sm space-y-1">
+                    <p><span className="text-emerald-500 font-medium">{stats.wins}</span> wins</p>
+                    <p><span className="text-red-400 font-medium">{stats.losses}</span> losses</p>
                   </div>
                 </div>
               </div>
