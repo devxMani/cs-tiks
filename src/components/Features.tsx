@@ -1,173 +1,91 @@
 import { motion } from "framer-motion";
+import { BookOpen, Swords, Trophy, User } from "lucide-react";
+
+const features = [
+  {
+    icon: BookOpen,
+    title: "Solo Practice",
+    description: "Pick a topic, answer 10 questions at your own pace. Get instant feedback with explanations.",
+    tags: ["10 Questions", "No Timer", "Detailed Feedback"],
+  },
+  {
+    icon: Swords,
+    title: "1v1 Quick Duel",
+    description: "Random matchmaking. Same 5 questions for both players. 20 seconds per question.",
+    tags: ["Real-time", "5 Questions", "20s Timer"],
+  },
+  {
+    icon: Trophy,
+    title: "Leaderboard",
+    description: "Compete for the top spot. Track your rank, win rate, and accuracy against other players.",
+    tags: ["Global Rankings", "Win Streaks", "Stats"],
+  },
+  {
+    icon: User,
+    title: "Your Profile",
+    description: "Track your progress across all topics. View your match history and achievements.",
+    tags: ["Progress Tracking", "Achievements", "History"],
+  },
+];
 
 const Features = () => {
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden">
+    <section className="py-24 md:py-32">
       <div className="container px-6">
-        {/* Section header */}
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+          transition={{ duration: 0.5 }}
+          className="max-w-xl mb-16"
         >
-          <span className="status-badge mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-foreground/50" />
-            FEATURES
+          <span className="inline-block px-3 py-1.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border/60 bg-card/50 mb-6">
+            Features
           </span>
-          <h2 className="text-3xl md:text-5xl font-light tracking-tight mt-4 max-w-2xl">
+          <h2 className="text-3xl md:text-4xl font-light tracking-tight">
             Everything you need to
             <span className="text-muted-foreground"> ace your interviews</span>
           </h2>
         </motion.div>
 
-        {/* Bento grid */}
-        <div className="bento-grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-          {/* Practice card - spans 2 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="md:col-span-2 glass-card p-8 min-h-[280px] flex flex-col justify-between group"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-8">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                  01_PRACTICE
-                </span>
-                <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center group-hover:bg-foreground/10 transition-colors">
-                  <span className="text-lg">⌘</span>
+        {/* Grid */}
+        <div className="grid md:grid-cols-2 gap-4">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+            return (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="group p-6 md:p-8 rounded-xl border border-border/50 bg-card/30 hover:bg-card/50 transition-colors"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center shrink-0">
+                    <Icon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-medium mb-2">{feature.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                      {feature.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {feature.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-1 text-[10px] uppercase tracking-wider rounded-full border border-border/60 text-muted-foreground"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-light mb-3">Solo Practice Mode</h3>
-              <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
-                Pick a topic (DSA, DBMS, OS, Networks). Get 10 random questions.
-                Immediate feedback with correct answers and explanations.
-              </p>
-            </div>
-            <div className="flex items-center gap-4 mt-6">
-              <span className="px-3 py-1 text-[10px] uppercase tracking-wider border border-border rounded-full">
-                10 Questions
-              </span>
-              <span className="px-3 py-1 text-[10px] uppercase tracking-wider border border-border rounded-full">
-                Instant Feedback
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Duels card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="glass-card p-8 min-h-[280px] flex flex-col justify-between group"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-8">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                  02_COMPETE
-                </span>
-                <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center group-hover:bg-foreground/10 transition-colors">
-                  <span className="text-lg">⚔</span>
-                </div>
-              </div>
-              <h3 className="text-xl font-light mb-3">1v1 Quick Duel</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Random matchmaking. Same 5 questions for both players. 
-                20 seconds per question. Winner takes points.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 mt-6">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-slow" />
-              <span className="text-[10px] text-muted-foreground">Live</span>
-            </div>
-          </motion.div>
-
-          {/* Leaderboard card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="glass-card p-8 min-h-[280px] flex flex-col justify-between group"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-8">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                  03_RANK
-                </span>
-                <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center group-hover:bg-foreground/10 transition-colors">
-                  <span className="text-lg">◆</span>
-                </div>
-              </div>
-              <h3 className="text-xl font-light mb-3">Leaderboard</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Top 50 players. Sort by total wins or accuracy. Track your progress and climb the ranks.
-              </p>
-            </div>
-            <div className="mt-6 space-y-2">
-              <div className="flex items-center justify-between text-[10px]">
-                <span className="text-muted-foreground">Your Rank</span>
-                <span>#---</span>
-              </div>
-              <div className="w-full h-1 bg-muted rounded-full" />
-            </div>
-          </motion.div>
-
-          {/* Profile card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="md:col-span-2 glass-card p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
-          >
-            <div className="flex items-center gap-6">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-muted to-accent flex items-center justify-center">
-                <span className="text-2xl">◈</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-light">Simple Profile</h3>
-                <p className="text-sm text-muted-foreground">Username, avatar, win/loss record, accuracy %</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 text-[10px] uppercase tracking-wider">
-              <span className="text-muted-foreground">Total Matches</span>
-              <span className="text-muted-foreground">—</span>
-              <span className="text-muted-foreground">Topic-wise Scores</span>
-            </div>
-          </motion.div>
-
-          {/* Free tier card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="md:col-span-2 glass-card p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
-          >
-            <div className="flex items-center gap-6">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-muted to-accent flex items-center justify-center">
-                <span className="text-2xl">∞</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-light">100% Free Forever</h3>
-                <p className="text-sm text-muted-foreground">No credit card required. No hidden limits.</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                Unlimited Practice
-              </span>
-              <span className="text-muted-foreground">—</span>
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                Unlimited Duels
-              </span>
-            </div>
-          </motion.div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
